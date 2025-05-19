@@ -53,6 +53,7 @@ $GroupParam = @{
 # Get users
 $users = get-mguser -All -Property $properties | Where-Object { $_.OnPremisesSyncEnabled -eq $true -and $_.DisplayName -notlike "*Synchronization Service Account*" } | Select-Object $properties | Out-Null
 $users | Out-File -FilePath $env:ALLUSERSPROFILE\AD-Sync.csv -Encoding utf8
+
 # Create group "Users - AD sync"
 Function CreateGroup {
     New-MgGroup -BodyParameter $GroupParam
